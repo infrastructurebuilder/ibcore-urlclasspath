@@ -73,7 +73,6 @@
 			<version>0.30.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
-
 	<profiles>
 		<profile>
 			<id>run-its</id>
