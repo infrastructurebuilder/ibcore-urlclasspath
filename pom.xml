@@ -52,6 +52,7 @@
     <surefire.failIfNoTests>false</surefire.failIfNoTests>
     <test.coverage.percentage.required>0</test.coverage.percentage.required>
     <jacoco.max.missed.classes>99</jacoco.max.missed.classes>
+    <maven.compiler.jdk.version>9</maven.compiler.jdk.version>
   </properties>
 
   <dependencies>
