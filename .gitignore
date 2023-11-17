@@ -1,0 +1,9 @@
+.*
+!.gitignore
+!.editorconfig
+!.gitpod.yml
+target
+*.iml
+pom.xml.*
+release.properties
+/bin
