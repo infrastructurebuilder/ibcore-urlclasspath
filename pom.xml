@@ -29,7 +29,7 @@
 
   <groupId>org.infrastructurebuilder.util</groupId>
   <artifactId>ibcore-urlclasspath</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1</version>
   <packaging>jar</packaging>
 
   <name>${project.artifactId}</name>
@@ -41,7 +41,7 @@
     <connection>scm:git:${git.url}</connection>
     <url>${git.scm.url}</url>
     <developerConnection>scm:git:${git.url}</developerConnection>
-    <tag>HEAD</tag>
+    <tag>ibcore-urlclasspath-1.0.1</tag>
   </scm>
 
   <properties>
