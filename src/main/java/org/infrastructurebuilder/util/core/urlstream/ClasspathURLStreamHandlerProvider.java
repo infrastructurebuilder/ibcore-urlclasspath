@@ -28,6 +28,7 @@ public class ClasspathURLStreamHandlerProvider extends URLStreamHandlerProvider 
   public ClasspathURLStreamHandlerProvider() {
     System.out.println("Loaded " + getClass().getCanonicalName());
   }
+
   @Override
   public URLStreamHandler createURLStreamHandler(String protocol) {
     System.out.println("Handling " + protocol + "?");
