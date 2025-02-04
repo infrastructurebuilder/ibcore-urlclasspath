@@ -57,9 +57,13 @@ public class SeekableInMemoryByteChannel implements SeekableByteChannel {
   /**
    * Constructor taking a size of storage to be allocated.
    *
+<<<<<<< HEAD
    * <p>
    * Creates a channel and allocates internal storage of a given size.
    * </p>
+=======
+   * <p>Creates a channel and allocates internal storage of a given size.</p>
+>>>>>>> 22c3276 (Cleaned up and added classpath FSP)
    *
    * @param size size of internal buffer to allocate, in bytes.
    */
