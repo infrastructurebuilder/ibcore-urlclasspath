@@ -30,8 +30,6 @@ public class AndResourceFilter implements ResourceFilter {
     this(new ArrayList<>());
   }
 
-
-
   public AndResourceFilter(List<ResourceFilter> list) {
     if (list != null)
       filters.addAll(list);

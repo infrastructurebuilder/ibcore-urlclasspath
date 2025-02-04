@@ -50,7 +50,9 @@ public class InputStreamReadOnlySeekableByteChannel implements SeekableByteChann
    * @param tempFileRequired true if a temp file wanted, false in case of a in-memory solution option.
    * @throws IOException if an I/O error occurs
    */
-  public InputStreamReadOnlySeekableByteChannel(final Supplier<InputStream> resource, long len, int bufferSize) throws IOException {
+  public InputStreamReadOnlySeekableByteChannel(final Supplier<InputStream> resource, long len, int bufferSize)
+      throws IOException
+  {
     this.res = resource;
     this.bufferSize = bufferSize;
     this.length = len;

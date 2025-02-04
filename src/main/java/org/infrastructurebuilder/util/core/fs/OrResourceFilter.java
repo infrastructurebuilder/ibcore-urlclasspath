@@ -31,8 +31,6 @@ public class OrResourceFilter implements ResourceFilter {
     this(new ArrayList<>());
   }
 
-
-
   public OrResourceFilter(List<ResourceFilter> list) {
     if (list != null)
       filters.addAll(list);
@@ -42,7 +40,6 @@ public class OrResourceFilter implements ResourceFilter {
     if (rf != null)
       filters.add(rf);
   }
-
 
   @Override
   public boolean accept(Resource resource) {

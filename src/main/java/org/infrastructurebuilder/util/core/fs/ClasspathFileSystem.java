@@ -67,7 +67,7 @@ public class ClasspathFileSystem extends FileSystem implements Comparable<Classp
     this.classLoader = Thread.currentThread().getContextClassLoader(); // FIXME
     this.provider = Objects.requireNonNull(provider);
     this.root = new ClasspathPath(this, Path.of("/"));
-    this.filestore = new ClasspathFileStore(this,config);
+    this.filestore = new ClasspathFileStore(this, config);
   }
 
   @Override

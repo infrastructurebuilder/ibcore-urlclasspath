@@ -221,6 +221,4 @@ public class ClasspathPath implements Path {
     return Objects.equals(fileSystem, other.fileSystem) && Objects.equals(path, other.path);
   }
 
-
-
 }

@@ -31,7 +31,7 @@ import java.nio.file.FileSystem;
 import java.nio.file.LinkOption;
 import java.nio.file.OpenOption;
 import java.nio.file.Path;
-import static  java.nio.file.StandardOpenOption.*;
+import static java.nio.file.StandardOpenOption.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileAttribute;
 import java.nio.file.attribute.FileAttributeView;
@@ -82,7 +82,7 @@ public class ClasspathFilesystemProvider extends FileSystemProvider {
     // Kill your call if you try
     if (attrs != null && attrs.length > 0)
       throw new IllegalArgumentException("Only READ is allowed here %s".formatted(attrs));
-    for (OpenOption opt: options)
+    for (OpenOption opt : options)
       if (opt != READ)
         throw new IllegalArgumentException("Only READ is allowed here %s".formatted(options));
     options = (Set<? extends OpenOption>) List.of(READ);
@@ -130,7 +130,7 @@ public class ClasspathFilesystemProvider extends FileSystemProvider {
 
   @Override
   public ClasspathFileStore getFileStore(Path path) throws IOException {
-    return (ClasspathFileStore) ((ClasspathPath)path).getFileSystem().getFileStores().iterator().next();
+    return (ClasspathFileStore) ((ClasspathPath) path).getFileSystem().getFileStores().iterator().next();
   }
 
   @Override
