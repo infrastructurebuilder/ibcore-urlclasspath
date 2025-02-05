@@ -31,7 +31,6 @@ public class ClasspathURLStreamHandlerProvider extends URLStreamHandlerProvider 
 
   @Override
   public URLStreamHandler createURLStreamHandler(String protocol) {
-    System.out.println("Handling " + protocol + "?");
     if ("classpath".equals(protocol)) {
       return new URLStreamHandler() {
         @Override

@@ -19,79 +19,95 @@
 
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.infrastructurebuilder</groupId>
-    <artifactId>ibparent</artifactId>
-    <version>94</version>
-  </parent>
+	<parent>
+		<groupId>org.infrastructurebuilder</groupId>
+		<artifactId>ibparent</artifactId>
+		<version>104-SNAPSHOT</version>
+	</parent>
 
-  <groupId>org.infrastructurebuilder.util</groupId>
-  <artifactId>ibcore-urlclasspath</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
-  <packaging>jar</packaging>
+	<groupId>
+		org.infrastructurebuilder.util</groupId>
+	<artifactId>ibcore-urlclasspath</artifactId>
+	<version>
+		1.0.2-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
-  <name>${project.artifactId}</name>
-  <description>URL loader for `classpath:` resources</description>
-  <!-- URL for site gen -->
-  <url>${git.scm.url}</url>
+	<name>
+		${project.artifactId}</name>
+	<description>URL loader for `classpath:`
+		resources</description>
+	<!-- URL for site gen -->
+	<url>${git.scm.url}</url>
 
-  <scm>
-    <connection>scm:git:${git.url}</connection>
-    <url>${git.scm.url}</url>
-    <developerConnection>scm:git:${git.url}</developerConnection>
-    <tag>HEAD</tag>
-  </scm>
+	<scm>
+		<connection>scm:git:${git.url}</connection>
+		<url>${git.scm.url}</url>
+		<developerConnection>scm:git:${git.url}</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
 
-  <properties>
-    <git.url.base>git@github.com:${team.group.id}</git.url.base>
-    <ib.site.path>${project.groupId}/${project.artifactId}/${project.version}</ib.site.path>
-    <git.url>${git.url.base}/${project.artifactId}.git</git.url>
+	<properties>
+		<git.url.base>git@github.com:${team.group.id}</git.url.base>
+		<ib.site.path>
+			${project.groupId}/${project.artifactId}/${project.version}</ib.site.path>
+		<git.url>${git.url.base}/${project.artifactId}.git</git.url>
+		<surefire.failIfNoTests>false</surefire.failIfNoTests>
+		<test.coverage.percentage.required>
+			0</test.coverage.percentage.required>
+		<jacoco.max.missed.classes>99</jacoco.max.missed.classes>
+		<maven.compiler.jdk.version>
+			17</maven.compiler.jdk.version>
+	</properties>
 
-    <surefire.failIfNoTests>false</surefire.failIfNoTests>
-    <test.coverage.percentage.required>0</test.coverage.percentage.required>
-    <jacoco.max.missed.classes>99</jacoco.max.missed.classes>
-    <maven.compiler.jdk.version>9</maven.compiler.jdk.version>
-  </properties>
-
-  <dependencies>
-  </dependencies>
-
-  <profiles>
-    <profile>
-      <id>run-its</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-invoker-plugin</artifactId>
-            <configuration>
-              <addTestClassPath>true</addTestClassPath>
-              <debug>true</debug>
-              <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
-              <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
-              <projectsDirectory>src/it</projectsDirectory>
-              <showVersion>true</showVersion>
-              <pomIncludes>
-                <pomInclude>*/pom.xml</pomInclude>
-              </pomIncludes>
-              <preBuildHookScript>prepare</preBuildHookScript>
-              <postBuildHookScript>verify</postBuildHookScript>
-              <settingsFile>src/it/settings.xml</settingsFile>
-            </configuration>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>install</goal>
-                  <goal>integration-test</goal>
-                  <goal>verify</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
+	<dependencies>
+		<dependency>
+			<groupId>io.github.classgraph</groupId>
+			<artifactId>classgraph</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.infrastructurebuilder</groupId>
+			<artifactId>ibcore-executor</artifactId>
+			<version>0.30.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	<profiles>
+		<profile>
+			<id>run-its</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-invoker-plugin</artifactId>
+						<configuration>
+							<addTestClassPath>true</addTestClassPath>
+							<debug>true</debug>
+							<localRepositoryPath>
+								${project.build.directory}/local-repo</localRepositoryPath>
+							<cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
+							<projectsDirectory>src/it</projectsDirectory>
+							<showVersion>true</showVersion>
+							<pomIncludes>
+								<pomInclude>*/pom.xml</pomInclude>
+							</pomIncludes>
+							<preBuildHookScript>prepare</preBuildHookScript>
+							<postBuildHookScript>verify</postBuildHookScript>
+							<settingsFile>src/it/settings.xml</settingsFile>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>install</goal>
+									<goal>integration-test</goal>
+									<goal>verify</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
