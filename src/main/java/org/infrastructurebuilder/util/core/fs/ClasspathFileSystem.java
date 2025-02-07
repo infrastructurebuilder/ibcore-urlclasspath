@@ -18,7 +18,6 @@
 package org.infrastructurebuilder.util.core.fs;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.nio.file.FileStore;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
@@ -28,17 +27,9 @@ import java.nio.file.WatchService;
 import java.nio.file.attribute.UserPrincipalLookupService;
 import java.nio.file.spi.FileSystemProvider;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
-
-import io.github.classgraph.ResourceList;
-import io.github.classgraph.ResourceList.ResourceFilter;
-import io.github.classgraph.ScanResult;
 
 /**
  * The classpath filesystem is organized quite differently from "real" filesystems.
@@ -108,6 +99,10 @@ public class ClasspathFileSystem extends FileSystem implements Comparable<Classp
   @Override
   public Iterable<FileStore> getFileStores() {
     return List.of(this.filestore);
+  }
+
+  ClasspathFileStore getFileStore() {
+    return this.filestore;
   }
 
   @Override

@@ -17,6 +17,8 @@
  */
 package org.infrastructurebuilder.util.core.fs;
 
+import static org.infrastructurebuilder.exceptions.IBException.cet;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
@@ -31,7 +33,6 @@ import java.nio.file.Path;
 import java.nio.file.attribute.FileAttributeView;
 import java.nio.file.attribute.FileStoreAttributeView;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Objects;
 
 import org.infrastructurebuilder.exceptions.IBException;
@@ -48,7 +49,7 @@ public class ClasspathFileStore extends FileStore {
   private ScanResult scan;
   private int hash = Integer.MIN_VALUE;
   private ResourceList resourceList;
-  private int maxBufferSize;
+  private int maxBufferSize =  2048;
   private final ClasspathFileSystem cpfs;
 
   public ClasspathFileStore(ClasspathFileSystem fs, ClasspathConfig config) {
@@ -176,13 +177,14 @@ public class ClasspathFileStore extends FileStore {
       }
     } else {
       try {
-        sb = new InputStreamReadOnlySeekableByteChannel(() -> IBException.cet.returns(() -> res.open()),
+        sb = new SeekableInputStreamReadOnlyByteChannel(() -> cet.returns(() -> res.open()),
             res.getLength(), maxBufferSize);
       } catch (IBException e) {
         // Cheating just a little
-        throw (IBException) e.getCause();
+        throw new IOException(e.getCause());
       }
     }
+    sb.position(0);
     return sb;
   }
 

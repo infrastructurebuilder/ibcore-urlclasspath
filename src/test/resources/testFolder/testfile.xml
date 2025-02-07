@@ -54,8 +54,9 @@
 			${project.groupId}/${project.artifactId}/${project.version}</ib.site.path>
 		<git.url>${git.url.base}/${project.artifactId}.git</git.url>
 		<surefire.failIfNoTests>false</surefire.failIfNoTests>
-		<test.coverage.percentage.required>31</test.coverage.percentage.required>
-		<jacoco.max.missed.classes>6</jacoco.max.missed.classes>
+		<test.coverage.percentage.required>
+			0</test.coverage.percentage.required>
+		<jacoco.max.missed.classes>99</jacoco.max.missed.classes>
 		<maven.compiler.jdk.version>
 			17</maven.compiler.jdk.version>
 	</properties>

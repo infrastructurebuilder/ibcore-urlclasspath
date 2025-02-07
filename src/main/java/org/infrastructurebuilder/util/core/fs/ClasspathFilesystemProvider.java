@@ -17,26 +17,24 @@
  */
 package org.infrastructurebuilder.util.core.fs;
 
+import static java.nio.file.StandardOpenOption.READ;
+
 import java.io.IOException;
 import java.net.URI;
-import java.nio.ByteBuffer;
-import java.nio.channels.Channels;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.file.AccessMode;
 import java.nio.file.CopyOption;
 import java.nio.file.DirectoryStream;
 import java.nio.file.DirectoryStream.Filter;
-import java.nio.file.FileStore;
 import java.nio.file.FileSystem;
 import java.nio.file.LinkOption;
 import java.nio.file.OpenOption;
 import java.nio.file.Path;
-import static java.nio.file.StandardOpenOption.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileAttribute;
 import java.nio.file.attribute.FileAttributeView;
+import java.nio.file.attribute.FileTime;
 import java.nio.file.spi.FileSystemProvider;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
@@ -85,7 +83,8 @@ public class ClasspathFilesystemProvider extends FileSystemProvider {
     for (OpenOption opt : options)
       if (opt != READ)
         throw new IllegalArgumentException("Only READ is allowed here %s".formatted(options));
-    options = (Set<? extends OpenOption>) List.of(READ);
+
+//    options = (Set<? extends OpenOption>) List.of(READ);
 
     return getFileStore(path).getSeekableByteChannelForPath(path.toString());
   }
@@ -153,8 +152,14 @@ public class ClasspathFilesystemProvider extends FileSystemProvider {
 
   @Override
   public Map<String, Object> readAttributes(Path path, String attributes, LinkOption... options) throws IOException {
-    // TODO Auto-generated method stub
-    return null;
+    ResourceList res = fs.get().getFileStore().getResourceForPath(path.toString());
+    if (res.size()==0)
+      throw new IOException("No such file %s".formatted(path));
+    Resource r = res.get(0);
+    FileTime lm = FileTime.fromMillis(r.getLastModified());
+    Long size = Long.valueOf(r.getLength());
+
+    return Map.of("lastModifiedTime", lm, "size", size);
   }
 
   @Override

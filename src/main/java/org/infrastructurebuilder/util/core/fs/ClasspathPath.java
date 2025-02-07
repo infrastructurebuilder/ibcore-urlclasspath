@@ -31,7 +31,6 @@ import java.nio.file.WatchEvent.Kind;
 import java.nio.file.WatchEvent.Modifier;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -64,7 +63,8 @@ public class ClasspathPath implements Path {
     } catch (MalformedURLException e) {
       throw new RuntimeException(e);
     }
-    if (!(path.toString().equals(fileSystem.getSeparator()) && path.startsWith(fileSystem.getSeparator())))
+    if (!path.toString().equals(sep))
+      if (path.startsWith(fileSystem.getSeparator()))
       throw new UnsupportedOperationException("Classpath paths must be relative {}".formatted(path));
   }
 
@@ -219,5 +219,10 @@ public class ClasspathPath implements Path {
       return false;
     ClasspathPath other = (ClasspathPath) obj;
     return Objects.equals(fileSystem, other.fileSystem) && Objects.equals(path, other.path);
+  }
+
+  @Override
+  public String toString() {
+    return path;
   }
 }

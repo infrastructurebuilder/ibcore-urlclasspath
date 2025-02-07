@@ -26,12 +26,10 @@ import java.nio.channels.SeekableByteChannel;
 
 import com.google.common.base.Supplier;
 
-import io.github.classgraph.Resource;
-
 /**
  * A class that fakes a SeekableByteChannel by wrapping an easy-to-reopen element
  */
-public class InputStreamReadOnlySeekableByteChannel implements SeekableByteChannel {
+public class SeekableInputStreamReadOnlyByteChannel implements SeekableByteChannel {
 
   private final Supplier<InputStream> res;
   private boolean open = true;
@@ -50,7 +48,7 @@ public class InputStreamReadOnlySeekableByteChannel implements SeekableByteChann
    * @param tempFileRequired true if a temp file wanted, false in case of a in-memory solution option.
    * @throws IOException if an I/O error occurs
    */
-  public InputStreamReadOnlySeekableByteChannel(final Supplier<InputStream> resource, long len, int bufferSize)
+  public SeekableInputStreamReadOnlyByteChannel(final Supplier<InputStream> resource, long len, int bufferSize)
       throws IOException
   {
     this.res = resource;
@@ -136,7 +134,7 @@ public class InputStreamReadOnlySeekableByteChannel implements SeekableByteChann
 
   @Override
   public int read(ByteBuffer dst) throws IOException {
-    return 0;
+    return this.ins.read(dst);
   }
 
   @Override
