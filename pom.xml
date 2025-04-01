@@ -24,14 +24,13 @@
 	<parent>
 		<groupId>org.infrastructurebuilder</groupId>
 		<artifactId>ibparent</artifactId>
-		<version>104</version>
+		<version>106</version>
 	</parent>
 
 	<groupId>
 		org.infrastructurebuilder.util</groupId>
 	<artifactId>ibcore-urlclasspath</artifactId>
-	<version>
-		1.0.2-SNAPSHOT</version>
+	<version>1.0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>

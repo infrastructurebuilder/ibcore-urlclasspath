@@ -30,10 +30,13 @@ import java.nio.file.FileSystem;
 import java.nio.file.LinkOption;
 import java.nio.file.OpenOption;
 import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileAttribute;
 import java.nio.file.attribute.FileAttributeView;
 import java.nio.file.attribute.FileTime;
+import java.nio.file.attribute.PosixFileAttributeView;
+import java.nio.file.attribute.PosixFileAttributes;
 import java.nio.file.spi.FileSystemProvider;
 import java.util.Map;
 import java.util.Set;
@@ -144,16 +147,25 @@ public class ClasspathFilesystemProvider extends FileSystemProvider {
   }
 
   @Override
-  public <A extends BasicFileAttributes> A readAttributes(Path path, Class<A> type, LinkOption... options)
+  public <A extends BasicFileAttributes> A readAttributes(Path file, Class<A> type, LinkOption... options)
       throws IOException {
-    // TODO Auto-generated method stub
-    return null;
+    Class<? extends BasicFileAttributeView> view;
+    if (type == BasicFileAttributes.class)
+      view = BasicFileAttributeView.class;
+    else if (type == PosixFileAttributes.class)
+      view = PosixFileAttributeView.class;
+    else if (type == null)
+      throw new NullPointerException();
+    else
+      throw new UnsupportedOperationException();
+    return (A) getFileAttributeView(file, view, options).readAttributes();
+
   }
 
   @Override
   public Map<String, Object> readAttributes(Path path, String attributes, LinkOption... options) throws IOException {
     ResourceList res = fs.get().getFileStore().getResourceForPath(path.toString());
-    if (res.size()==0)
+    if (res.size() == 0)
       throw new IOException("No such file %s".formatted(path));
     Resource r = res.get(0);
     FileTime lm = FileTime.fromMillis(r.getLastModified());

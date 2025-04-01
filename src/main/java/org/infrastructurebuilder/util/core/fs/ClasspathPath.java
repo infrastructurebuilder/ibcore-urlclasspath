@@ -159,7 +159,7 @@ public class ClasspathPath implements Path {
     ClasspathPath o = (ClasspathPath) other;
     String[] parts = new String[this.parts.length + o.parts.length];
     int i = 0;
-    for (; i < parts.length; ++i)
+    for (; i < this.parts.length; ++i)
       parts[i] = this.parts[i];
     for (int j = 0; j < o.parts.length; ++j) {
       parts[i + j] = o.parts[j];
